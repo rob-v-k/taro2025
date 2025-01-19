@@ -68,7 +68,8 @@
                 console.log(`Input Hash: ${inputHash}`);
                 console.log(`Correct Hash: ${correctHash}`);
                 if (inputHash === correctHash) {
-                    window.location.href = 'uitnodiging.html';
+				window.location.href = inputPincode + '.html';
+                    
                 } else {
                     document.getElementById('message').innerText = 'Foutieve pincode. Probeer het opnieuw.';
                 }
