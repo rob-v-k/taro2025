@@ -62,7 +62,7 @@
     <script>
         function checkPincode() {
             const inputPincode = document.getElementById('pincode').value.trim();
-            const correctHash = '35d5aa731b1e6a3a5289b288e3913427c85ebe2e937ff61273da39d601af2f1f'; // Hash van de pincode 5678
+            const correctHash = '5498901f83fb7f17767a47e47a279933ac67cc778d237bf268b9a7c825abe45c'; 
 
             sha256(inputPincode).then(inputHash => {
                 console.log(`Input Hash: ${inputHash}`);
