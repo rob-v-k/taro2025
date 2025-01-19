@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pincode Verificatie</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0a0;
+        }
+        #message {
+            margin-top: 20px;
+        }
+        a {
+            color: #0f0;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Kraak de code om de uitnodiging te openen:</h2>
+    <input type="password" id="pincode" placeholder="Pincode">
+    <button onclick="checkPincode()">Verzenden</button>
+    <p id="message"></p>
+    <a href="#" onclick="openHint1()">Klik hier voor de eerste hint</a>
+    <a href="#" onclick="openHint2()">Klik hier voor de tweede hint</a>
+    <a href="#" onclick="openHint3()">Klik hier voor de derde hint</a>
+    <a href="#" onclick="openHint4()">Klik hier voor de vierde hint</a>
+
+    <script>
+        function checkPincode() {
+            const inputPincode = document.getElementById('pincode').value.trim();
+            const correctHash = '35d5aa731b1e6a3a5289b288e3913427c85ebe2e937ff61273da39d601af2f1f'; // Hash van de pincode 5678
+
+            sha256(inputPincode).then(inputHash => {
+                console.log(`Input Hash: ${inputHash}`);
+                console.log(`Correct Hash: ${correctHash}`);
+                if (inputHash === correctHash) {
+                    window.location.href = 'uitnodiging.html';
+                } else {
+                    document.getElementById('message').innerText = 'Foutieve pincode. Probeer het opnieuw.';
+                }
+            });
+        }
+
+        function openHint1() {
+            window.open('hint1.html', 'Hint', 'width=1200,height=800');
+        }
+        function openHint2() {
+            window.open('hint2.html', 'Hint', 'width=1200,height=800');
+        }
+        function openHint3() {
+            window.open('hint3.html', 'Hint', 'width=1200,height=800');
+        }
+        function openHint4() {
+            window.open('hint4.html', 'Hint', 'width=1200,height=800');
+        }
+
+        // Functie om een SHA-256 hash te genereren
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+    </script>
+	<h4><br><br><br><br>Hulp nodig? Stuur een berichtje naar 06 5143 8284<h4>
+</body>
+</html>
